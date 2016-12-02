@@ -94,6 +94,7 @@ let VueComponent = ( function(){
 		build( template, _props.name, _props.properties, _props.methods )
 	}
 	, build = function( template, name, props = {}, methods = {} ){
+		Object.assign( methods, { generateUID } ) // utility
 		let _component = Vue.extend(
 			{
 				template
