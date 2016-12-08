@@ -17,9 +17,13 @@ let VueComponent = ( function(){
 
 
 	let init = () => true
+	// utils
 	, generateUID = (name='',a,b) => {for(b=a='';a++<12;b+=a*51&52?(a^15?8^Math.random()*(a^20?16:4):4).toString(16):'-'); return `${name}${(name.length>0?'--':'')}${b}`}
+	, concat = ( ...list ) => list.join( ' ' )
+	// hooks
 	, getMainVue = () => $mainVue
 	, getEventBus = () => VUE_EVENT_BUS
+	// build
 	, register = function( components, options = null ){
 		if( Array.isArray( components ) === true ){
 			for( let component of components ){
@@ -94,7 +98,7 @@ let VueComponent = ( function(){
 		build( template, _props.name, _props.properties, _props.methods )
 	}
 	, build = function( template, name, props = {}, methods = {} ){
-		Object.assign( methods, { generateUID } ) // utility
+		Object.assign( methods, { generateUID, concat } ) // utilities
 		let _component = Vue.extend(
 			{
 				template
