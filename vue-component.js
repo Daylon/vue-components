@@ -118,7 +118,14 @@ let VueComponent = ( function(){
 		}
 	}
 	, addEventListener = ( _eventName, _callback ) => VUE_EVENT_BUS.$on( _eventName, _callback )
-	, track = ( _vue ) => ( $mainVue = _vue )
+	, track = function( _vue ){
+		$mainVue = _vue
+		$mainVue.$nextTick( function(){
+			for( let component of $mainVue.$children ){
+				if( component.init ) component.init()
+			}
+		})
+	}
 
 	return { init, register, set, addEventListener, track }
 })
