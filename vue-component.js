@@ -87,9 +87,7 @@ let VueComponent = ( function(){
 				&& _prop != 'length'
 			){
 				if( REGEXP_PROPERTY.test( _prop.name ) === true ){
-					console.log( 'REGEXP_PROPERTY.test( _prop.name ) === true')
 					_propertyName = _prop.name.substring( PROPERTY_RADIX.length )
-					console.log( '_propertyName', _propertyName)
 					if( _propertyName === 'name' ){
 						_props.name = _prop.value
 					} else {
