@@ -15,10 +15,15 @@ let VueComponent = ( function(){
 	, _promises = []
 	, $parser = new DOMParser()
 
-
 	let init = () => true
 	// utils
-	, generateUID = (name='',a,b) => {for(b=a='';a++<12;b+=a*51&52?(a^15?8^Math.random()*(a^20?16:4):4).toString(16):'-'); return `${name}${(name.length>0?'--':'')}${b}`}
+	, generateUID = ( name = '', a = '', b = '' ) => {
+		while( a < 12 ){
+			b += ( a * 51 & 52 ? ( a^15 ? 8^Math.random() * ( a^20 ? 16 : 4 ) : 4).toString( 16 ) : '-' )
+			a++
+		}
+		return `${name}${(name.length>0?'--':'')}${b}`
+	}
 	, concat = ( ...list ) => list.join( ' ' )
 	// hooks
 	, getMainVue = () => $mainVue
@@ -75,13 +80,21 @@ let VueComponent = ( function(){
 			, properties : []
 			, methods : {}
 		}
-		for( let _prop of _target.attributes ){
-			if( REGEXP_PROPERTY.test( _prop.name ) === true ){
-				_propertyName = _prop.name.substring( PROPERTY_RADIX.length )
-				if( _propertyName === 'name' ){
-					_props.name = _prop.value
-				} else {
-					_props.properties.push( Case.toCamelCase( _propertyName ) )
+
+		for( let _prop of Array.from( _target.attributes ) ){
+			if(
+				_prop != 'prototype'
+				&& _prop != 'length'
+			){
+				if( REGEXP_PROPERTY.test( _prop.name ) === true ){
+					console.log( 'REGEXP_PROPERTY.test( _prop.name ) === true')
+					_propertyName = _prop.name.substring( PROPERTY_RADIX.length )
+					console.log( '_propertyName', _propertyName)
+					if( _propertyName === 'name' ){
+						_props.name = _prop.value
+					} else {
+						_props.properties.push( Case.toCamelCase( _propertyName ) )
+					}
 				}
 			}
 		}
