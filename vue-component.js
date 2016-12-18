@@ -15,9 +15,8 @@ let VueComponent = ( function(){
 	, _promises = []
 	, $parser = new DOMParser()
 
-	let init = () => true
 	// utils
-	, generateUID = ( name = '', a = '', b = '' ) => {
+	let generateUID = ( name = '', a = '', b = '' ) => {
 		while( a < 12 ){
 			b += ( a * 51 & 52 ? ( a^15 ? 8^Math.random() * ( a^20 ? 16 : 4 ) : 4).toString( 16 ) : '-' )
 			a++
@@ -138,7 +137,7 @@ let VueComponent = ( function(){
 		})
 	}
 
-	return { init, register, set, addEventListener, track }
+	return { register, set, addEventListener, track }
 })
 
 module.exports = new VueComponent()
