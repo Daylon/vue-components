@@ -95,7 +95,7 @@ let VueComponent = ( function(){
 				}
 			}
 		}
-		_scriptNode = _node.getElementsByTagName( 'script' )
+		_scriptNode = _node !== null ? _node.getElementsByTagName( 'script' ) : null
 		if( _scriptNode && _scriptNode[ 0 ] ){
 			_props.methods = eval( _scriptNode[0].innerHTML ).make( getMainVue, getEventBus )
 		}
