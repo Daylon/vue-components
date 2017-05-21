@@ -128,6 +128,7 @@ let VueComponent = ( function(){
 		}
 	}
 	, addEventListener = ( _eventName, _callback ) => VUE_EVENT_BUS.$on( _eventName, _callback )
+	, fireEvent = ( _eventName, ...args ) => VUE_EVENT_BUS.$emit( _eventName, ...args )
 	, track = function( _vue ){
 		$mainVue = _vue
 		$mainVue.$nextTick( function(){
@@ -137,7 +138,7 @@ let VueComponent = ( function(){
 		})
 	}
 
-	return { register, set, addEventListener, track, generateUID }
+	return { register, set, addEventListener, fireEvent, track, generateUID }
 })
 
 module.exports = new VueComponent()
