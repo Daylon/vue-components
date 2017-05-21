@@ -137,7 +137,7 @@ let VueComponent = ( function(){
 		})
 	}
 
-	return { register, set, addEventListener, track }
+	return { register, set, addEventListener, track, generateUID }
 })
 
 module.exports = new VueComponent()
