@@ -23,7 +23,12 @@ let VueComponent = ( function(){
 		}
 		return `${name}${(name.length>0?'--':'')}${b}`
 	}
-	, concat = ( ...list ) => list.map( ( value ) => value.toString().trim() ).join( ' ' )
+	, trimValues = ( value = '' ) => `${value}`.trim()
+	, concat = function( ...list ){
+		return list
+			.map( trimValues )
+			.join( ' ' )
+	}
 	// hooks
 	, getMainVue = () => $mainVue
 	, getEventBus = () => VUE_EVENT_BUS
