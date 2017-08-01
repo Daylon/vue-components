@@ -11,7 +11,6 @@ let VueComponent = function() {
 		$templateNames = [],
 		$templateProperties = [],
 		$templateCache = [],
-		_promises = [],
 		$parser = new DOMParser()
 
 	// utils
