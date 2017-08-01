@@ -15,8 +15,8 @@ let VueComponent = function() {
 		$parser = new DOMParser()
 
 	// utils
-	let generateUID = (name = '', a = 0, b = '') => {
-			while (a < 12) {
+	let generateUID = (name = '', strength = 12, b = '', a = 1) => {
+			while (a < strength) {
 				b +=
 					(a * 51) & 52
 						? (a ^ 15 ? 8 ^ (Math.random() * (a ^ 20 ? 16 : 4)) : 4).toString(
