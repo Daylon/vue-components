@@ -38,7 +38,7 @@ let VueComponent = function() {
 		register = function(components, options = null) {
 			const PROMISES = []
 				.concat(components)
-				.map(component => registerOneComponent(`${component}`))
+				.map(component => registerOneComponent(`${component}`)) // as per @laruiss review
 			return Promise.all(PROMISES)
 				.then(_templates => {
 					for (let _html of _templates) {
