@@ -45,7 +45,11 @@ let VueComponent = function() {
 						prepare(`${_template}`, _props)
 					}
 				})
-				.then(() => (options !== null ? set(options) : null))
+				.then(() => {
+					let _v = options !== null ? set(options) : null
+					fireEvent('global.init')
+					return _v
+				})
 		},
 		isolateComponentName = function(componentName) {
 			if (/\?noscript$/i.test(componentName) === true) {
@@ -124,20 +128,29 @@ let VueComponent = function() {
 				return null
 			}
 		},
+		addInitListener = _callback => addEventListener('global.init', _callback),
 		addEventListener = (_eventName, _callback) =>
 			VUE_EVENT_BUS.$on(_eventName, _callback),
 		fireEvent = (_eventName, ...args) =>
 			VUE_EVENT_BUS.$emit(_eventName, ...args),
-		track = function(_vue) {
+		track = _vue => {
 			$mainVue = _vue
-			$mainVue.$nextTick(function() {
+			$mainVue.$nextTick(() => {
 				for (let component of $mainVue.$children) {
 					if (component.init) component.init()
 				}
 			})
 		}
 
-	return { register, set, addEventListener, fireEvent, track, generateUID }
+	return {
+		register,
+		set,
+		addInitListener,
+		addEventListener,
+		fireEvent,
+		track,
+		generateUID
+	}
 }
 
 module.exports = new VueComponent()
