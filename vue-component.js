@@ -20,7 +20,7 @@ let VueComponent = function() {
 					(a * 51) & 52
 						? (a ^ 15 ? 8 ^ (Math.random() * (a ^ 20 ? 16 : 4)) : 4).toString(
 								16
-							)
+						  )
 						: '-'
 				a++
 			}
@@ -111,7 +111,7 @@ let VueComponent = function() {
 			build(template, _props.name, _props.properties, _props.methods)
 		},
 		build = function(template, name, props = {}, methods = {}) {
-			Object.assign(methods, { generateUID, concat }) // utilities
+			methods = { ...methods, ...{ generateUID, concat } } // utilities
 			let _component = Vue.extend({
 				template,
 				props,
